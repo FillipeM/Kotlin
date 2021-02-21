@@ -7,25 +7,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.firstapp.R
 import com.example.firstapp.model.User
 
-class UserAdapter: RecyclerView.Adapter<UserListItemHolder> (){
-    var list = listOf<User>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class UserAdapter(private val users: MutableList<User>): RecyclerView.Adapter<UserListItemHolder> (){
+//    var list = listOf<User>()
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
 
 
-    override fun getItemCount() = list.size
+    override fun getItemCount() = users.size
 
     override fun onBindViewHolder(holder: UserListItemHolder, position: Int) {
-        val item = list[position]
+        val item = users[position]
 
-        holder.lblName.text = item.name
+        holder.name.text = item.name
+        holder.login.text = item.login
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListItemHolder {
         val li = LayoutInflater.from(parent.context)
-        val view = li.inflate(R.layout.user_list_item, parent, false) as TextView
+        val view = li.inflate(R.layout.user_list_item, parent, false)
         return  UserListItemHolder(view)
     }
 }

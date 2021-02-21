@@ -1,38 +1,32 @@
 package com.example.firstapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.contentcapture.DataShareWriteAdapter
 import android.widget.Button
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firstapp.data.UserDataBaseHelper
+import com.example.firstapp.model.User
 import com.example.firstapp.util.UserAdapter
+import kotlinx.android.synthetic.main.activity_list_user.*
+
 
 class ListUserActivity : AppCompatActivity() {
-    var dataAdapter = UserAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_user)
 
-        var rv = findViewById<RecyclerView>(R.id.recyclerView);
-        rv.adapter = dataAdapter
-        getData()
 
-        val btn = findViewById<Button>(R.id.btnVoltar)
-        btn.setOnClickListener(View.OnClickListener {
-
-        })
-
-
-
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager( this@ListUserActivity)
+            adapter = UserAdapter(getData())
+        }
     }
 
-    fun getData()
-    {
+    fun getData() : MutableList<User> {
         val context = this
         val db = UserDataBaseHelper(context)
 
-        dataAdapter.list = db.readData();
+        return db.readData();
     }
 }
