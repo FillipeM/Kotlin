@@ -8,14 +8,14 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.example.firstapp.model.User
 
-val DATABASENAME = "FIRSTAPPDATABASE"
-val DATABASE_VERSION = 1
-val TABLENAME = "Users"
-val COL_NAME = "name"
-val COL_LOGIN = "login"
-val COL_PWD = "pwd"
-val COL_CODIGO = "codUsuario"
-val COL_DELETED = "DELETED"
+private val DATABASENAME = "FIRSTAPPDATABASE"
+private val DATABASE_VERSION = 1
+private val TABLENAME = "Users"
+private val COL_NAME = "name"
+private val COL_LOGIN = "login"
+private val COL_PWD = "pwd"
+private val COL_CODIGO = "codUsuario"
+private val COL_DELETED = "DELETED"
 
 class UserDataBaseHelper (var context : Context) : SQLiteOpenHelper(context, DATABASENAME, null, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase?) {
