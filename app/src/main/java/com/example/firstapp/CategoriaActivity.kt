@@ -1,5 +1,6 @@
 package com.example.firstapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,18 +14,22 @@ class CategoriaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_categoria)
 
         val codCategoria = 0
-        val descCategoria = txtDescCategoria.text.toString()
 
         val db = CategoryDataBaseHelper(this)
         btnSalvarCategoria.setOnClickListener(View.OnClickListener {
-            val categoria = Categoria(codCategoria, descCategoria)
+            val categoria = Categoria(codCategoria, txtDescCategoria.text.toString())
             db.insertData(categoria)
             clearFields()
+        })
+
+        btnConsultaCategorias.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, ListCategoriaActivity::class.java)
+            startActivity(intent)
         })
     }
 
     private fun clearFields() {
-        txtCodCategoria.text = ""
-        txtDescCategoria.text = ""
+        txtCodCategoria.text.clear()
+        txtDescCategoria.text.clear()
     }
 }

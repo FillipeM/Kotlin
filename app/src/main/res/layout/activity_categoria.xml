@@ -6,25 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".CategoriaActivity">
 
-    <TextView
+    <EditText
         android:id="@+id/txtCodCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Código"
+        android:hint="Código"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtDescCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:text="Descrição da Categoria"
+        android:hint="Descrição da Categoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,4 +39,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtDescCategoria"
         android:layout_marginTop="10mm"/>
+
+    <Button
+        android:id="@+id/btnConsultaCategorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/btnConsultar"
+        app:layout_constraintTop_toBottomOf="@+id/btnSalvarCategoria"
+        app:layout_constraintStart_toStartOf="@+id/btnSalvarCategoria"
+        app:layout_constraintEnd_toEndOf="@+id/btnSalvarCategoria"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

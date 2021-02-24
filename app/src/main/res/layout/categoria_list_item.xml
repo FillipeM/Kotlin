@@ -2,25 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <TextView
         android:id="@+id/lblCodCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:text="Código"
-        android:textSize="32sp"/>
+        android:textSize="32sp"
+        app:layout_constraintEnd_toStartOf="@+id/lblDescCategoria"
+        app:layout_constraintStart_toStartOf="@id/lblCodCategoria"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/lblDescCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Descricao"
-        android:textSize="32sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintStart_toStartOf="@id/lblCodCategoria"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toEndOf="@id/lblCodCategoria"
+        app:layout_constraintTop_toBottomOf="@id/lblCodCategoria" />
 </androidx.constraintlayout.widget.ConstraintLayout>

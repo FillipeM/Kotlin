@@ -10,4 +10,8 @@ class Categoria {
         this.codCategoria = codCategoria
         this.descCategoria = descCategoria
     }
+
+    override fun toString(): String {
+        return "$codCategoria - $descCategoria"
+    }
 }

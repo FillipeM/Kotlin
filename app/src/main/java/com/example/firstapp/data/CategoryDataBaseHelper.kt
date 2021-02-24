@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 import com.example.firstapp.model.Categoria
 
-private val DATABASENAME = "FIRSTAPPDATABASE"
+private val DATABASENAME = "CATEGORIADB"
 private val DATABASE_VERSION = 1
 private val TABLENAME = "Categories"
 private val COL_CODIGO = "codCategory"
@@ -28,7 +28,6 @@ class CategoryDataBaseHelper(var context: Context): SQLiteOpenHelper(context, DA
     {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(COL_CODIGO, categoria.codCategoria)
         contentValues.put(COL_DESCRICAO, categoria.descCategoria)
          val resultInsert = db.insert(TABLENAME, null, contentValues)
 
