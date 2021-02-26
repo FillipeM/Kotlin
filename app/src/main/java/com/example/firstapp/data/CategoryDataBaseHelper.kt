@@ -59,4 +59,20 @@ class CategoryDataBaseHelper(var context: Context): SQLiteOpenHelper(context, DA
         }
         return list
     }
+
+    fun getById(codCategoria:Int): Categoria?{
+        var categoria: Categoria? = null
+        val db = this.readableDatabase
+        val command = "Select * from $TABLENAME where $COL_CODIGO = $codCategoria"
+        val result = db.rawQuery(command, null)
+        if (result.moveToFirst())
+        {
+            do{
+                categoria = Categoria()
+                categoria?.codCategoria = result.getString(result.getColumnIndex(COL_CODIGO)).toInt()
+                categoria?.descCategoria = result.getString(result.getColumnIndex(COL_DESCRICAO))
+            }while (result.moveToNext())
+        }
+        return categoria
+    }
 }

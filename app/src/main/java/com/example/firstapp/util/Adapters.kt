@@ -1,6 +1,8 @@
 package com.example.firstapp.util
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstapp.R
 import com.example.firstapp.model.Categoria
+import com.example.firstapp.model.Produto
 import com.example.firstapp.model.User
 
 
@@ -52,6 +55,30 @@ class CategoriaAdapter(private val categoria: MutableList<Categoria>): RecyclerV
     }
 
     override fun getItemCount() = categoria.size
+
+}
+
+class ProdutoAdapter(private  val produtos: MutableList<Produto>): RecyclerView.Adapter<ProdutoListItemHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoListItemHolder {
+        val li = LayoutInflater.from(parent.context)
+        val view = li.inflate(R.layout.produto_list_item, parent, false)
+        return ProdutoListItemHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ProdutoListItemHolder, position: Int) {
+        val item = produtos[position]
+
+        holder.descProduto.text = item.descProduto
+        holder.descCategoria.text = item.categoria?.descCategoria ?: ""
+        val img = item.img
+        if (img != null)
+        {
+            val bitmap = BitmapFactory.decodeByteArray(img, 0, img.size)
+            holder.img.setImageBitmap(bitmap)
+        }
+    }
+
+    override fun getItemCount() = produtos.size
 
 }
 

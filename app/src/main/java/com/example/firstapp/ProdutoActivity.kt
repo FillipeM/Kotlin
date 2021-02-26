@@ -2,20 +2,23 @@ package com.example.firstapp
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.hardware.camera2.CameraDevice
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.firstapp.data.CategoryDataBaseHelper
+import com.example.firstapp.data.ProdutoDataBaseHelper
 import com.example.firstapp.util.CustomSpinAdapter
 import kotlinx.android.synthetic.main.activity_produto.*
+import java.io.ByteArrayOutputStream
 
 const val REQUEST_IMAGE_CAPTURE = 1
+
 class ProdutoActivity : AppCompatActivity() {
+    var codCategoria: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_produto)
@@ -25,7 +28,36 @@ class ProdutoActivity : AppCompatActivity() {
             dispatchTakePictureIntent()
         })
 
+        btnSalvarProduto.setOnClickListener(View.OnClickListener {
+            saveProduto()
+        })
+
+        btnListarProdutos.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, ListProdutoActivity::class.java)
+            startActivity(intent)
+        })
     }
+
+    private fun saveProduto() {
+        val db = ProdutoDataBaseHelper(this)
+        val img = (imageView.drawable as BitmapDrawable).bitmap
+        val stream = ByteArrayOutputStream()
+        img.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val ba = stream.toByteArray()
+        db.insertData(
+            descProduto = txtDescricaoProduto.text.toString(),
+            codCategoria = codCategoria,
+            img = ba
+        )
+    }
+
+    private  fun clearFields()
+    {
+        txtDescricaoProduto.text.clear()
+        loadSpinnerData()
+        imageView.setImageDrawable(null)
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -35,7 +67,7 @@ class ProdutoActivity : AppCompatActivity() {
         }
     }
 
-    private fun dispatchTakePictureIntent(){
+    private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -67,10 +99,7 @@ class ProdutoActivity : AppCompatActivity() {
             ) {
                 val categoria = adapter.getItem(position)
 
-                Toast.makeText(
-                    this@ProdutoActivity,
-                    categoria.toString(), Toast.LENGTH_LONG
-                ).show()
+                codCategoria = categoria.codCategoria
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
